@@ -1,0 +1,166 @@
+<head>
+    <meta charset = "UTF-8" />
+    <title>Simulación nubes</title>
+    <link rel="stylesheet" href="life.css">    
+</head>
+<style>
+    body {
+    padding: 20px;
+    background-color: #02CFD6;
+}
+
+#gridContainer {
+    padding-bottom: 10px;
+}
+
+h1{
+    color:#0A3A47;
+}
+
+table {
+    background-image: url('fondo.png'); /* Cambia 'ruta/a/tu/imagen.jpg' por la ruta de tu imagen */
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir completamente el área de la tabla */
+    border-spacing: 0;
+}
+
+
+td {
+    border: 1px solid rgba(241, 245, 218, 0.5); /* Reducir la opacidad del color del borde */
+    border-radius: 3px;
+    width: 10px;
+    height: 10px;
+}
+
+span {
+    color: #222;
+}
+.button img {
+            width: 30px; /* Tamaño deseado de las imágenes */
+            height: 30px; /* Tamaño deseado de las imágenes */
+}
+.button-group h3 {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+#start,
+#clear,
+#random {
+    padding: .75em;
+    border-radius: 5px;
+    border: none;    
+    background: linear-gradient(
+        to bottom right,
+        #C5DEC6, #587559);
+}
+
+#caracteristicas {
+    padding: .75em;
+    border-radius: 5px;
+    border: none;    
+    background-color: #f93a00; /* Color rojo por defecto */
+}
+
+#caracteristicas.active {
+    background-color: #587559; /* Color verde cuando caracteristicas=true */
+}
+
+
+td.dead {
+    background-color: transparent;
+}
+
+td.live {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+
+.slider-container {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 80%;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 15px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+    </style>
+<body>
+<h1>Simulación nubes</h1>
+<div id="gridContainer">
+    
+</div>
+
+<div class="controls">
+<button id="start"><span>Iniciar</span></button>
+<button id="clear"><span>Limpiar</span></button>
+<button id="random"><span>Random</span></button>
+<button id="caracteristicas"><span>Ver temperatura y humedad</span></button>
+</div>
+<div class="button-group">
+    <h3>Dirección del viento</h3>
+    <button id="up" class="button"><img src="up.png" alt="Arriba"></button>
+    <button id="down" class="button"><img src="down.png" alt="Abajo"></button>
+    <button id="left" class="button"><img src="left.png" alt="Izquierda"></button>
+    <button id="right" class="button"><img src="right.png" alt="Derecha"></button>
+    <button id="stop" class="button"><img src="stop.png" alt="Stop"></button>
+</div>
+<div class="slider-container">
+    <label for="temp-slider">Temperatura °C:</label>
+    <input type="range" min="-10" max="40" value="30" class="slider" id="temp-slider">
+    <span id="temp-value">30</span>
+</div>
+<div class="slider-container">
+    <label for="humidity-slider">Humedad %:</label>
+    <input type="range" min="20" max="100" value="40" class="slider" id="humidity-slider">
+    <span id="humidity-value">40</span>
+</div>
+<div id="info"></div>
+<script src="main.js"></script>
+<script>
+    // JavaScript para manejar el valor del slider y mostrarlo
+    const slider = document.getElementById("temp-slider");
+    const output = document.getElementById("temp-value");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function() {
+        output.innerHTML = this.value;
+    };
+</script>
+<script>
+    // JavaScript para manejar el valor del slider de humedad y mostrarlo
+    const humiditySlider = document.getElementById("humidity-slider");
+    const humidityOutput = document.getElementById("humidity-value");
+    humidityOutput.innerHTML = humiditySlider.value;
+
+    humiditySlider.oninput = function() {
+        humidityOutput.innerHTML = this.value;
+    };
+</script>
+</body>
